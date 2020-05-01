@@ -23,7 +23,7 @@ Source1:        mit.txt
 %if 0%{?bootstrap}
 Source2:        http://www.lua.org/ftp/lua-%{bootstrap_version}.tar.gz
 %endif
-Source3:        http://www.lua.org/tests/lua-%{version}-tests.tar.gz
+Source3:        http://www.lua.org/tests/lua-5.3.4-tests.tar.gz
 # multilib
 Source4:        luaconf.h
 # rpm-macro
@@ -142,7 +142,7 @@ popd
 %endif
 
 %check
-cd ./lua-%{version}-tests/
+cd ./lua-5.3.4-tests/
 
 # Dont skip the fully portable or ram-hungry tests:
 # sed -i.orig -e '
