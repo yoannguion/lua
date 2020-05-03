@@ -2,7 +2,7 @@
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches: [ test ]
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -14,16 +14,25 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      - name: ls before
+        run: |
+          ls -l
       - name: build rpm el7
         env:
           SPEC_FILE: lua.spec
           RELEASE_TAG: v5.3.5
           RELEASE_GITHUB_TOKEN: ${{ secrets.RELEASE_GITHUB_TOKEN }}
         uses: docker://yoannguion/rpmbuilder:el7
+      - name: ls after el7
+        run: |
+          ls -l
       - name: build rpm el8
         env:
           SPEC_FILE: lua.spec
           RELEASE_TAG: v5.3.5
           RELEASE_GITHUB_TOKEN: ${{ secrets.RELEASE_GITHUB_TOKEN }}
         uses: docker://yoannguion/rpmbuilder
+      - name: ls after el8
+        run: |
+          ls -l
 
